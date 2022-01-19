@@ -1,0 +1,33 @@
+{
+  "dependencies": {
+    "promise": "^8.1.0",
+    "request": "^2.88.2"
+  },
+  "name": "pixhost",
+  "description": "Node.Js implementation of Pixhost.to API.",
+  "version": "0.1.0",
+  "main": "index.js",
+  "directories": {
+    "example": "examples"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Alex-Kondakov/pixhost-js.git"
+  },
+  "keywords": [
+    "pixhost",
+    "image",
+    "hosting",
+    "api"
+  ],
+  "author": "Alex Kondakov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Alex-Kondakov/pixhost-js/issues"
+  },
+  "homepage": "https://github.com/Alex-Kondakov/pixhost-js#readme"
+}
