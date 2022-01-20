@@ -6,9 +6,8 @@ Node.Js implementation of Pixhost.to API.
 
 ```shell
 # cd /your/projects/dir
-# mkdir pixhost
-# cd pixhost
 # git clone https://github.com/Alex-Kondakov/pixhost-js.git
+# cd pixhost-js
 # npm install
 ```
 
