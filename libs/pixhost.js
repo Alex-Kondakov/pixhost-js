@@ -39,7 +39,7 @@ exports.init = () => {
                         //Uploaded links
                         let uploaded = []
                         for (const file of filePaths) {
-                            await this.uploadImage(file)
+                            await this.uploadImage(file, content_type, max_th_size, gallery_hash, gallery_upload_hash)
                                 .then(response => uploaded.push(response))
                         }
                         resolve(uploaded)
