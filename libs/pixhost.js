@@ -31,6 +31,25 @@ exports.init = () => {
                 })
             })
         },
+        //Upload all images from array
+        uploadAll (filePaths, content_type=1, max_th_size=320, gallery_hash, gallery_upload_hash) {
+            return new Promise ((resolve, reject) => {
+                (async () => {
+                    try {
+                        //Uploaded links
+                        let uploaded = []
+                        for (const file of filePaths) {
+                            await this.uploadImage(file)
+                                .then(response => uploaded.push(response))
+                        }
+                        resolve(uploaded)
+                    }
+                    catch (err) {
+                        reject(err)
+                    }
+                })()
+            })
+        },
         //Upload cover. PixHost.to cover is two images joined horizontally. images - array of left and right images (paths to each). right image is optional. content_type - adult content, 1 if true, 0 otherwise. gallery_hash, gallery_upload_hash - for upload to gallery
         uploadCover (images, content_type=1, gallery_hash, gallery_upload_hash) {
             let img_left = fs.createReadStream(images[0]);
