@@ -1,9 +1,21 @@
 // (c) Alex Kondakov
 // PixHost.to API implementation
 
-const Promise = require('promise');
-const fs = require('fs');
-const request  = require('request');
+const Promise = require('promise')
+const fs = require('fs')
+const path = require('path')
+const request  = require('request')
+
+//Checking if passed string JSON or not
+const isJson = input => {
+    try {
+        JSON.parse(input)
+    } 
+    catch (err) {
+        return false
+    }
+    return true
+}
 
 exports.init = () => {
     return {
@@ -24,9 +36,14 @@ exports.init = () => {
             return new Promise ((resolve, reject) => {
                 request.post({url: 'https://api.pixhost.to/images', headers: {'Content-Type': 'multipart/form-data; charset=utf-8', 'Accept': 'application/json'}, formData: data}, (err, httpResponse, body) => {
                     if (err) {
-                        reject(err);
+                        reject('pixhost uploadImage ' + err);
                     } else {
-                        resolve(JSON.parse(body));
+                        if (isJson(body)) {
+                            resolve(JSON.parse(body))
+                        } else {
+                            reject('pixhost uploadImage ' + body)
+                        }
+                        
                     }
                 })
             })
@@ -45,7 +62,7 @@ exports.init = () => {
                         resolve(uploaded)
                     }
                     catch (err) {
-                        reject(err)
+                        reject('pixhost uploadAll ' + err)
                     }
                 })()
             })
@@ -70,9 +87,13 @@ exports.init = () => {
             return new Promise ((resolve, reject) => {
                 request.post({url: 'https://api.pixhost.to/covers', headers: {'Content-Type': 'multipart/form-data; charset=utf-8', 'Accept': 'application/json'}, formData: data}, (err, httpResponse, body) => {
                     if (err) {
-                        reject(err);
+                        reject('pixhost uploadCover ' + err);
                     } else {
-                        resolve(JSON.parse(body));
+                        if (isJson(body)) {
+                            resolve(JSON.parse(body))
+                        } else {
+                            reject('pixhost uploadCover ' + body)
+                        }
                     }
                 })
             })
@@ -82,9 +103,13 @@ exports.init = () => {
            return new Promise ((resolve, reject) => {
                 request.post({url: 'https://api.pixhost.to/galleries', headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8', 'Accept': 'application/json'}, formData: {'gallery_name': gallery_name}}, (err, httpResponse, body) => {
                     if (err) {
-                        reject(err);
+                        reject('pixhost createGallery ' + err);
                     } else {
-                        resolve(JSON.parse(body));
+                        if (isJson(body)) {
+                            resolve(JSON.parse(body))
+                        } else {
+                            reject('pixhost createGallery ' + body)
+                        }
                     }
                 })
            }) 
@@ -94,7 +119,7 @@ exports.init = () => {
             return new Promise ((resolve, reject) => {
                  request.post({url: `https://api.pixhost.to/galleries/${gallery_hash}/finalize`, headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8', 'Accept': 'application/json'}, formData: {'gallery_upload_hash': gallery_upload_hash}}, (err, httpResponse, body) => {
                      if (err) {
-                         reject(err);
+                         reject('pixhost finalizeGallery ' + err);
                      } else {
                          resolve(httpResponse.statusCode);
                      }
