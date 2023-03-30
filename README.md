@@ -14,45 +14,31 @@ Node.Js implementation of Pixhost.to API.
 ## Image upload:
 
 ```javascript
-const pixhost = require('pixhost').init()
+import * as pixhost from 'pixhost'
 
-pixhost.uploadImage('/path/to/assets/image.jpg', 0, 500)
-    .then (response => console.log(response))
-    .catch (response => console.log(response))
+await response = pixhost.uploadImage('/path/to/assets/image.jpg')
+console.log(response)
 ```
 
 ## Cover upload:
 
 ```javascript
-const pixhost = require('pixhost').init()
+import * as pixhost from 'pixhost'
 
-pixhost.uploadCover(['/path/to/assets/cover_left.jpg', '/path/to/assets/cover_right.jpg'], 0)
-    .then (response => console.log(response))
-    .catch (response => console.log(response))
+await response = uploadCover(['/path/to/assets/cover_left.jpg', '/path/to/assets/cover_right.jpg'])
+console.log(response)
 ```
 
-## Galleries:
+## Galleries
 
 ```javascript
-const pixhost = require('pixhost').init()
-let galleryHash
-let galleryUploadHash
-let galleryUrl;
+import { uploadImage, createGallery, finalizeGallery } from './index.js'
 
-//Creating gallery, uploading image into it and finalizing
-(async () => {
-    await pixhost.createGallery('Test Gallery')
-        .then (response => {
-            galleryHash = response.gallery_hash
-            galleryUploadHash = response.gallery_upload_hash
-            galleryUrl = response.gallery_url
-        });
-    await pixhost.uploadImage('/path/to/assets/image.jpg', 0, 320, galleryHash, galleryUploadHash)
-    await pixhost.finalizeGallery(galleryHash, galleryUploadHash)
-        .then (response => {
-            if (response == 200) {
-                console.log(`Gallery hash: ${galleryHash}, gallery upload hash: ${galleryUploadHash}\nGallery url: ${galleryUrl}`)
-            }
-        })
-})()
+const gallery = await createGallery('test')
+const output = await uploadImage('/Users/deadtoto/Downloads/giphy.gif', gallery.gallery_upload_hash, gallery.gallery_hash)
+const finalyzedGallery = await finalizeGallery(gallery.gallery_upload_hash, gallery.gallery_hash)
+
+console.log(gallery)
+console.log(output)
+console.log(finalyzedGallery)
 ```

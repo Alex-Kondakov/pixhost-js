@@ -1,16 +1,12 @@
 {
-  "dependencies": {
-    "promise": "^8.1.0",
-    "request": "^2.88.2"
-  },
   "name": "pixhost",
   "description": "Node.Js implementation of Pixhost.to API.",
   "version": "0.1.0",
   "main": "index.js",
+  "type": "module",
   "directories": {
     "example": "examples"
   },
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -29,5 +25,8 @@
   "bugs": {
     "url": "https://github.com/Alex-Kondakov/pixhost-js/issues"
   },
-  "homepage": "https://github.com/Alex-Kondakov/pixhost-js#readme"
+  "homepage": "https://github.com/Alex-Kondakov/pixhost-js#readme",
+  "dependencies": {
+    "node-fetch": "^3.3.1"
+  }
 }
