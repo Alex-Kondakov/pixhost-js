@@ -16,7 +16,7 @@ Node.Js implementation of Pixhost.to API.
 ```javascript
 import * as pixhost from 'pixhost'
 
-await response = pixhost.uploadImage('/path/to/assets/image.jpg')
+const response = await pixhost.uploadImage('/path/to/assets/image.jpg')
 console.log(response)
 ```
 
@@ -25,7 +25,7 @@ console.log(response)
 ```javascript
 import * as pixhost from 'pixhost'
 
-await response = uploadCover(['/path/to/assets/cover_left.jpg', '/path/to/assets/cover_right.jpg'])
+const response = await pixhost.uploadCover(['/path/to/assets/cover_left.jpg', '/path/to/assets/cover_right.jpg'])
 console.log(response)
 ```
 
